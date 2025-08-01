@@ -1,0 +1,20 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "API Key"
+        },
+        "description": "Enter your Govee API key to connect to your lights.",
+        "title": "Govee Lights"
+      }
+    },
+    "error": {
+      "invalid_api_key": "Invalid API key",
+      "no_devices_found": "No devices found with this API key"
+    },
+    "abort": {
+      "already_configured": "Device is already configured"
+    }
+  }
+} 
