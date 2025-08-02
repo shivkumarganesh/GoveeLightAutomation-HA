@@ -11,7 +11,7 @@ from homeassistant import config_entries
 from homeassistant.const import CONF_API_KEY
 from homeassistant.data_entry_flow import FlowResult
 
-from .const import DOMAIN, CONF_ENABLE_RATE_LIMITING, DEFAULT_POLLING_INTERVAL
+from .const import DOMAIN, CONF_ENABLE_RATE_LIMITING
 from .govee_api import GoveeAPI
 
 _LOGGER = logging.getLogger(__name__)

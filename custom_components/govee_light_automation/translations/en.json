@@ -3,10 +3,11 @@
     "step": {
       "user": {
         "data": {
-          "api_key": "API Key"
+          "api_key": "API Key",
+          "enable_rate_limiting": "Enable Rate Limiting"
         },
         "description": "Enter your Govee API key to connect to your lights.",
-        "title": "Govee Lights"
+        "title": "Govee Light Automation"
       }
     },
     "error": {
