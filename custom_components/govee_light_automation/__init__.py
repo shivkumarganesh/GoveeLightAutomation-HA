@@ -20,7 +20,6 @@ import homeassistant.helpers.config_validation as cv
 
 from .const import DOMAIN, CONF_ENABLE_RATE_LIMITING
 from .govee_api import GoveeAPI
-from .config_flow import GoveeConfigFlow
 
 _LOGGER = logging.getLogger(__name__)
 
