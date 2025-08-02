@@ -20,20 +20,17 @@ import homeassistant.helpers.config_validation as cv
 
 from .const import DOMAIN, CONF_ENABLE_RATE_LIMITING
 from .govee_api import GoveeAPI
+from .config_flow import GoveeConfigFlow
 
 _LOGGER = logging.getLogger(__name__)
 
 PLATFORMS: list[Platform] = [Platform.LIGHT, Platform.SENSOR]
 
-CONFIG_SCHEMA = vol.Schema(
-    {
-        DOMAIN: vol.Schema(
-            {
-                vol.Required(CONF_API_KEY): cv.string,
-            }
-        )
-    }
-)
+
+async def async_setup(hass: HomeAssistant, config: dict[str, Any]) -> bool:
+    """Set up the Govee Light Automation component."""
+    hass.data.setdefault(DOMAIN, {})
+    return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -63,4 +60,15 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
         hass.data[DOMAIN].pop(entry.entry_id)
 
-    return unload_ok 
+    return unload_ok
+
+
+CONFIG_SCHEMA = vol.Schema(
+    {
+        DOMAIN: vol.Schema(
+            {
+                vol.Required(CONF_API_KEY): cv.string,
+            }
+        )
+    }
+) 
