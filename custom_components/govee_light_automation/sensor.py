@@ -16,7 +16,9 @@ from homeassistant.helpers.update_coordinator import (
     DataUpdateCoordinator,
 )
 
-from .const import DOMAIN
+DOMAIN = "govee_light_automation"
+CONF_ENABLE_RATE_LIMITING = "enable_rate_limiting"
+
 from .govee_api import GoveeAPI
 
 _LOGGER = logging.getLogger(__name__)

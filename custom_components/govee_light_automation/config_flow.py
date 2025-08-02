@@ -10,7 +10,8 @@ from homeassistant import config_entries
 from homeassistant.const import CONF_API_KEY
 from homeassistant.data_entry_flow import FlowResult
 
-from .const import DOMAIN, CONF_ENABLE_RATE_LIMITING
+DOMAIN = "govee_light_automation"
+CONF_ENABLE_RATE_LIMITING = "enable_rate_limiting"
 
 
 class GoveeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
