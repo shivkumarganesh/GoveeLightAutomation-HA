@@ -20,7 +20,6 @@ import homeassistant.helpers.config_validation as cv
 
 from .const import DOMAIN, CONF_ENABLE_RATE_LIMITING
 from .govee_api import GoveeAPI
-from .config_flow import GoveeConfigFlow
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -30,10 +29,6 @@ PLATFORMS: list[Platform] = [Platform.LIGHT, Platform.SENSOR]
 async def async_setup(hass: HomeAssistant, config: dict[str, Any]) -> bool:
     """Set up the Govee Light Automation component."""
     hass.data.setdefault(DOMAIN, {})
-    
-    # Register config flow
-    hass.config_entries.flow.async_register_entry_flow(DOMAIN, GoveeConfigFlow)
-    
     return True
 
 
