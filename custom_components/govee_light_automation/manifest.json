@@ -1,11 +1,11 @@
 {
   "domain": "govee_light_automation",
   "name": "Govee Light Automation",
-  "documentation": "https://github.com/shivkumarganesh/home-assistant-govee-integration",
+  "documentation": "https://github.com/shivkumarganesh/GoveeLightAutomation-HA",
   "dependencies": [],
   "codeowners": ["@shivkumarganesh"],
   "requirements": ["aiohttp>=3.8.0"],
-  "version": "1.0.0",
+  "version": "1.0.2",
   "iot_class": "cloud_polling",
   "config_flow": true,
   "integration_type": "device"
