@@ -1,4 +1,4 @@
-"""Minimal config flow for testing."""
+"""Config flow for Govee Light Automation integration."""
 
 from __future__ import annotations
 
@@ -12,6 +12,7 @@ from homeassistant.const import CONF_API_KEY
 from homeassistant.data_entry_flow import FlowResult
 
 from .const import DOMAIN, CONF_ENABLE_RATE_LIMITING
+from .govee_api import GoveeAPI
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -28,11 +29,29 @@ class GoveeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors = {}
 
         if user_input is not None:
-            # For testing, just accept the input without API validation
-            return self.async_create_entry(
-                title="Govee Light Automation",
-                data=user_input,
-            )
+            try:
+                # Test the API key
+                api_key = user_input[CONF_API_KEY]
+                enable_rate_limiting = user_input.get(CONF_ENABLE_RATE_LIMITING, True)
+                
+                # Create API instance for testing
+                govee_api = GoveeAPI(api_key, enable_rate_limiting)
+                
+                # Try to get devices to validate the API key
+                devices = await govee_api.get_devices()
+                
+                if devices:
+                    await govee_api.close()
+                    return self.async_create_entry(
+                        title="Govee Light Automation",
+                        data=user_input,
+                    )
+                else:
+                    errors["base"] = "no_devices_found"
+                    
+            except Exception as ex:
+                _LOGGER.error("Error during config flow: %s", ex)
+                errors["base"] = "invalid_api_key"
 
         return self.async_show_form(
             step_id="user",
