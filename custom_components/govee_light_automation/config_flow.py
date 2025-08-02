@@ -9,7 +9,8 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.const import CONF_API_KEY
 from homeassistant.data_entry_flow import FlowResult
-from .const import DOMAIN, CONF_ENABLE_RATE_LIMITING
+
+DOMAIN = "govee_light_automation"
 
 
 class GoveeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -32,11 +33,6 @@ class GoveeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             data_schema=vol.Schema(
                 {
                     vol.Required(CONF_API_KEY): str,
-                    vol.Optional(CONF_ENABLE_RATE_LIMITING, default=True): bool,
                 }
             ),
         )
-
-    async def async_step_import(self, import_info: dict[str, Any]) -> FlowResult:
-        """Handle import from configuration.yaml."""
-        return await self.async_step_user(import_info) 
