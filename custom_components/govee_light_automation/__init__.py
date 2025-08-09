@@ -1,6 +1,5 @@
-"""The Govee Light Automation integration."""
-"""
-Govee Light Automation Integration for Home Assistant
+"""Govee Light Automation integration for Home Assistant.
+
 Author: Shiv Kumar Ganesh (gshiv.sk@gmail.com)
 """
 
@@ -70,4 +69,4 @@ CONFIG_SCHEMA = vol.Schema(
             }
         )
     }
-) 
+)
