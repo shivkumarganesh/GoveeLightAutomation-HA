@@ -1,11 +1,18 @@
+
 # Example configuration.yaml entry for Govee Light Automation integration
 # Replace YOUR_GOVEE_API_KEY with your actual API key from Govee Developer Portal
 
+default_config:
+frontend:
+automation:
+script:
+scene:
+
 govee_light_automation:
   api_key: YOUR_GOVEE_API_KEY
+  # devices:
+  #   - device_id: "xx:xx:xx:xx:xx:xx:xx:xx"
+  #     name: "Living Room Light"
 
-# Optional: You can also configure specific devices if needed
-# This is not required as the integration will auto-discover devices
-light:
-  - platform: govee_light_automation
-    # Additional device-specific configuration can be added here if needed 
+# Remove any unsupported options from inside govee_light_automation.
+# Only use valid options as per the integration documentation.
