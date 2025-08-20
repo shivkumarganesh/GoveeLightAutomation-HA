@@ -37,6 +37,19 @@ CONFIG_SCHEMA = vol.Schema(
     extra=vol.ALLOW_EXTRA  # This allows other root-level config options
 )
 
+# Configuration schema
+CONFIG_SCHEMA = vol.Schema(
+    {
+        DOMAIN: vol.Schema(
+            {
+                vol.Required(CONF_API_KEY): cv.string,
+                vol.Optional(CONF_ENABLE_RATE_LIMITING, default=True): cv.boolean,
+            }
+        )
+    },
+    extra=vol.ALLOW_EXTRA  # This allows other root-level config options
+)
+
 async def async_setup(hass: HomeAssistant, config: dict[str, Any]) -> bool:
     """Set up the Govee Light Automation component."""
     hass.data.setdefault(DOMAIN, {})
