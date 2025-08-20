@@ -24,10 +24,39 @@ _LOGGER = logging.getLogger(__name__)
 
 PLATFORMS: list[Platform] = [Platform.LIGHT, Platform.SENSOR]
 
+# Configuration schema
+CONFIG_SCHEMA = vol.Schema(
+    {
+        DOMAIN: vol.Schema(
+            {
+                vol.Required(CONF_API_KEY): cv.string,
+                vol.Optional(CONF_ENABLE_RATE_LIMITING, default=True): cv.boolean,
+            }
+        )
+    },
+    extra=vol.ALLOW_EXTRA  # This allows other root-level config options
+)
 
 async def async_setup(hass: HomeAssistant, config: dict[str, Any]) -> bool:
     """Set up the Govee Light Automation component."""
     hass.data.setdefault(DOMAIN, {})
+    
+    if DOMAIN in config:
+        # If configuration.yaml has our integration's config
+        conf = config[DOMAIN]
+        api_key = conf[CONF_API_KEY]
+        enable_rate_limiting = conf.get(CONF_ENABLE_RATE_LIMITING, True)
+        
+        govee_api = GoveeAPI(api_key, enable_rate_limiting)
+        try:
+            # Test the API connection
+            await govee_api.get_devices()
+        except Exception as ex:
+            _LOGGER.error("Failed to connect to Govee API: %s", ex)
+            return False
+            
+        hass.data[DOMAIN]["config"] = govee_api
+        
     return True
 
 
